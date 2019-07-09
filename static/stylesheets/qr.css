@@ -1,0 +1,10 @@
+.video{
+	width: 80%;
+	position: relative;
+	left:50%;
+	transform: translate(-50%) !important;
+	
+}
+#preview{
+	width: 100%;
+}

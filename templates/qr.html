@@ -13,39 +13,54 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em"
         crossorigin="anonymous"></script>
 
-        <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/index.css') }}">
+        <script type="text/javascript" src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js" ></script>	
 
+        <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/index.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/qr.css') }}">
+
+        
+
+      
+<!-- qr thing   -->
 </head>
 <body>
+    <div style="position:absolute; left:50px;z-index: 10;"> <img src="https://image.flaticon.com/icons/svg/61/61752.svg" alt="" onclick="window.history.go(-1); return false;" width="50px;"> </div>
 
-
-    <div style="position:absolute; left:50px"> <img src="https://image.flaticon.com/icons/svg/61/61752.svg" alt="" onclick="window.history.go(-1); return false;" width="50px;"> </div>
 
     <div class="container">
 
    
 
-            <h2 style="text-align: center;">Pay with UPI</h2>
+            <h2 style="text-align: center;">Customer Payment Request</h2>
             <br>
-        <div id="main">
+            <button  type="button" class="btn btn-success submitt" id ="butt">Scan Customer's QR</button>
+            <br>
+        <br>
+            <div class="video"> <video id="preview" style="display: none;"></video>
+                <div id="qrsuccess" style="color:green;text-align: center;display:none"> Successfully Scanned QR Code</div>
+                <div id="qrfail" style="color:red;text-align: center;display:none"> Failed to get QR</div>
+            </div>
+           <br>
+        <!-- check qr.js for qr code -->
+
             <p>Fill below details:</p>
             <form id="upi">
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label for="mobile">Remitter Mobile Number:</label>
                     <input type="text" class="form-control" id="mobile" name="mobile">
                 </div>
                 <div class="form-group">
                     <label for="email">Remitter Email:</label>
                     <input type="text" class="form-control" id="email" name="email">
+                </div> -->
+                <div class="form-group">
+                    <label for="pa">Customer's VPA:</label>
+                    <input type="text" class="form-control" id="pa" name="pa" value="">
                 </div>
                 <div class="form-group">
-                    <label for="pa">Payee VPA:</label>
-                    <input type="text" class="form-control" id="pa" name="pa" value="teamphoton@upi">
+                    <label for="pn">Customer Name:</label>
+                    <input type="text" class="form-control" id="pn" name="pn" value="">
                 </div>
-                <!-- <div class="form-group">
-                    <label for="pn">Payee Name:</label>
-                    <input type="text" class="form-control" id="pn" name="pn" value="Hello">
-                </div> -->
                 <div class="form-group">
                     <label for="am">Amount:</label>
                     <input type="text" class="form-control" id="am" name="am" value="3000">
@@ -53,15 +68,14 @@
                 <!-- <div class="form-group">
                     <label for="tr">Transaction Reference ID:</label>
                     <input type="text" class="form-control" id="tr" name="tr">
-                </div>
-                <div class="form-group">
+                </div> -->
+                <!-- <div class="form-group">
                     <label for="tn">Transaction Note:</label>
                     <input type="text" class="form-control" id="tn" name="tn">
                 </div> -->
                 <button  type="button" class="btn btn-primary submitt" id ="butt" onclick="upi()">Submit</button>
                 <br><br>
 
-            </div>
                 <div style="text-align: center;color:red; font-size: 25px;">  
                           <span id="loadin" style="display: none;">Loading Request...</span>
                           <div id="timer" style="display: none;">
@@ -100,104 +114,8 @@
     
         </div>
     
-        <script>
-
-            let min; 
-            let sec;
-
-
-            function tick(){
-
-                min = 3;
-                sec = 0;
-
-
-                setInterval(function(){
-                 if(sec == 0){
-                    min= min-1;
-                    sec= 60;
-                 }
-                if(min==0){
-                    document.getElementById("timer").style.display = "none";
-                }
-
-                sec= sec-1;
-
-                document.getElementById("min").innerHTML= min;
-            document.getElementById("sec").innerHTML= sec;
-
-                }, 1000);
-
-
-            }
-
-
-
-            const createQueryParams = params =>
-                Object.keys(params)
-                    .map(k => `${k}=${encodeURI(params[k])}`)
-                    .join('&');
-    
-            function upi() {
-
-
-document.getElementById("main").style.display= "none";
-
-document.getElementById("loadin").style.display="block";
-
-
-// document.getElementById("butt").style.backgroundColor = "red";
-
-
-                var baseurl = "upi://pay?";
-                var mam = 'null';
-                var cu = 'INR';
-                const mobile = document.getElementById("mobile").value;
-                const email = document.getElementById("email").value;
-                var pa = document.getElementById("pa").value;
-                var pn = document.getElementById("pn").value;
-                var am = document.getElementById("am").value;
-                var tr = document.getElementById("tr").value;
-                var tn = document.getElementById("tn").value;
-                var data = { 'pa': pa, 'pn': pn, 'am': am, 'tr': tr, 'tn': tn, 'mam': mam, 'cu': cu};
-                const querystring = baseurl + createQueryParams(data);
-                console.log(querystring);
-                
-                $.ajax({
-                type: "POST",
-                url: "/",
-                data: {querystring:querystring, mobile:mobile, email:email}
-                }).done(function( res ) {
-                //TODO
-                var response = JSON.parse(res);
-                console.log(response);
-                if (response.status == 'success') {
-                    // $('#alert-success').show();
-                    $('#response').show();
-                    $('#upiLink').html(response.upiLink);
-                    $('#shortURL a').html(response.shortURL);
-                    $('#shortURL a').attr("href",response.shortURL);
-                    var loc = "https://api.qrserver.com/v1/create-qr-code/?data="+encodeURIComponent(response.upiLink)+"&amp;size=100x100";
-                    $('#qr img').attr("src",loc);
-
-
-
-                        tick(); 
-
-            document.getElementById("loadin").style.display="none";
-            document.getElementById("timer").style.display="block";
-
-
-                } else {
-                    $('#alert-danger').show();
-
-            document.getElementById("timer").style.display="none";
-            document.getElementById("loadin").style.display="none";
-
-                }
-                });
-            }
-    
-        </script>
+        
 </body>
+<script src="{{ url_for('static', filename='scripts/qr.js') }}"></script>
+
 </html>

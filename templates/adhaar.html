@@ -1,0 +1,32 @@
+<div style="position:absolute; left:50px;z-index: 10;"> <img src="https://image.flaticon.com/icons/svg/61/61752.svg" alt="" onclick="window.history.go(-1); return false;" width="50px;"> </div>
+
+<style>
+
+    [title]{
+    
+    font-size:5vh;
+    font-family: -apple-system,system-ui,BlinkMacSystemFont;
+    color:rgba(0, 0, 0, 0.6);
+    margin-top:20px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    }
+    
+    </style>
+    
+    
+    <div title>Please Place Your Finger Print</div>
+    <div class="bodymovinanim"></div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.5.3/lottie_svg.min.js"></script>
+    <script>
+    let svgContainer = document.querySelector('.bodymovinanim');
+        let animItem = bodymovin.loadAnimation({
+          wrapper: svgContainer,
+          animType: 'svg',
+          loop: true,
+          path: "https://assets6.lottiefiles.com/datafiles/pS5DxpLmGj8uaRd/data.json"
+        });
+        
+        </script>

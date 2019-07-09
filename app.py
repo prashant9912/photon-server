@@ -1,8 +1,9 @@
 from flask import Flask, render_template, request, redirect
 from flask_restful import Resource, Api
 import json, string, random, os
-from urllib.parse import urlsplit, urlencode, quote_plus
-from urllib.request import urlopen, Request
+from urllib import urlencode, quote_plus
+from urllib2 import urlopen, Request
+from urlparse import urlparse, urlsplit
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -10,12 +11,31 @@ from email.mime.text import MIMEText
 app = Flask(__name__)
 api = Api(app)
 
+app.static_folder = 'static'
+
 @app.after_request
 def after_request(response):
     response.headers.add('Access-Control-Allow-Origin', '*')
     response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
     response.headers.add('Access-Control-Allow-Methods', 'GET')
     return response
+
+@app.route('/main')
+def mai():
+    return render_template('main.html')
+
+@app.route('/qr')
+def qr():
+    return render_template('qr.html')
+
+@app.route('/nfc')
+def nfc():
+    return render_template('nfc.html')
+
+@app.route('/adhaar')
+def adhaar():
+    return render_template('adhaar.html')
+
 
 @app.route('/', methods = ['POST', 'GET'])
 def index():
