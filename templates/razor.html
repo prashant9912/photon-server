@@ -1,0 +1,57 @@
+<style>
+    body{
+        text-align: center;
+    }
+        .razorpay-payment-button {
+          background-color: #4CAF50;
+          border: none;
+          color: white;
+          padding: 15px 32px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 16px;
+          margin: 4px 2px;
+          cursor: pointer;
+          position: relative;
+/* left:50%;
+transform: translate(-50%); */
+margin-top:30px;
+transform: scale(1.2);
+        }
+
+        [title]{
+
+font-size:5vh;
+font-family: -apple-system,system-ui,BlinkMacSystemFont;
+color:rgba(0, 0, 0, 0.6);
+margin-top:20px;
+/* left: 50%;
+transform: translate(-50%); */
+}
+
+        </style>
+
+<div title>Total Payble Amount ₹100 </div>
+
+   
+   <form action="charge" method="POST">
+        <script
+            src="https://checkout.razorpay.com/v1/checkout.js"
+            data-key="rzp_test_KJaS279k3XSHLG"
+            data-amount="10000"
+            data-name="SIH Payment"
+            data-description="Purchase Description"
+            data-image="https://im.rediff.com/news/2016/dec/26smart-india.jpg"
+            data-netbanking="true"
+            data-description="SIH payment"
+            data-prefill.name="Prashant Gupta"
+            data-prefill.email="prashantg9912@gmail.com"
+            data-prefill.contact="9999999999"
+            data-notes.shopping_order_id="21">
+        </script>
+        <input type="hidden" name="shopping_order_id" value="21">
+    </form>
+
+
+ 

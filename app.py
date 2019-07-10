@@ -7,9 +7,14 @@ from urlparse import urlparse, urlsplit
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+import razorpay
+
+
 
 app = Flask(__name__)
 api = Api(app)
+
+
 
 app.static_folder = 'static'
 
@@ -19,6 +24,10 @@ def after_request(response):
     response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
     response.headers.add('Access-Control-Allow-Methods', 'GET')
     return response
+
+@app.route('/')
+def home():
+    return render_template('index.html')
 
 @app.route('/main')
 def mai():
@@ -36,6 +45,22 @@ def nfc():
 def adhaar():
     return render_template('adhaar.html')
 
+@app.route('/gateway')
+def gateway():
+    return render_template('razor.html')
+
+#Razor Pay Gateway
+razorpay_client = razorpay.Client(auth=("rzp_test_KJaS279k3XSHLG", "3L6pkF6GTek6blM6T95cPign"))
+
+@app.route('/charge', methods=['POST'])
+def razooor():
+    # amount = 5100
+    # payment_id = request.form['razorpay_payment_id']
+    # razorpay_client.payment.capture(payment_id, amount)
+    # return json.dumps(razorpay_client.payment.fetch(payment_id))
+    return render_template('success.html')
+
+##################################
 
 @app.route('/', methods = ['POST', 'GET'])
 def index():
