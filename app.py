@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect,Response
 from flask_restful import Resource, Api
 import json, string, random, os
 from urllib import urlencode, quote_plus
@@ -9,7 +9,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import razorpay
 import pandas as pd
-
+import os
 
 app = Flask(__name__)
 api = Api(app)
@@ -44,6 +44,17 @@ def qr():
 def nfc():
     return render_template('nfc.html')
 
+@app.route('/nfcpy', methods=["POST","GET"])
+def nfcc():
+    if request.method == "POST":
+        vpa=request.form['VPA']
+        amn=request.form['Amount']
+        mer=request.form['Merchant']
+        uri="upi://pay?pa="+vpa+"&pn="+mer+"&am="+amn+"&tn=&mam=null&cu=INR"
+        os.system('python ndef_url.py -u \"'+uri+'\"')
+        return Response(status=200)
+    else:
+        return Response(status=400)
 
 
 ####################################

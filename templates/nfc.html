@@ -45,4 +45,18 @@ let svgContainer = document.querySelector('.bodymovinanim');
       path: "https://assets2.lottiefiles.com/temp/lf20_uDCkn6.json"
     });
     
+// NFC Request
+
+let formData = new FormData();
+formData.append('VPA', 'hello@upi');
+formData.append('Amount', '100');
+formData.append('Merchant','prashant');
+fetch("/nfcpy",
+    {
+        body: formData,
+        method: "post"
+    });
+
+
+
     </script>
