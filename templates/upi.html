@@ -1,0 +1,63 @@
+<div style="position:absolute; left:50px;z-index: 10;"> <img src="https://image.flaticon.com/icons/svg/61/61752.svg" alt="" onclick="window.history.go(-1); return false;" width="50px;"> </div>
+
+<style>
+
+[title]{
+
+font-size:5vh;
+font-family: -apple-system,system-ui,BlinkMacSystemFont;
+color:rgba(0, 0, 0, 0.6);
+margin-top:20px;
+position: absolute;
+left: 50%;
+transform: translate(-50%);
+white-space: nowrap;
+}
+[title2]{
+
+font-size:5vh;
+font-family: -apple-system,system-ui,BlinkMacSystemFont;
+color:rgba(0, 0, 0, 0.6);
+margin-top:20px;
+left: 50%;
+transform: translate(-50%);
+position: absolute;
+top:8vh;
+font-size:4vh;
+background-color:green;
+color:white;
+white-space: nowrap;
+padding:5px;
+/* left: 50%;
+transform: translate(-50%); */
+}
+#blaah{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    width: 180px;
+}
+</style>
+
+
+<div title>Please Scan QR Code to Pay</div>
+<div title2>Total Payble Amount ₹100 </div>
+
+<img id="blaah" src=""/>
+
+<script>
+   
+
+fetch("http://localhost:5000/configview").then(e=>{return e.text()}).then(e=>{
+    let amn = "100";
+    let mer= "SIH";
+    let vpa=e;
+    let uri="https://api.qrserver.com/v1/create-qr-code/?data=upi://pay?pa="+vpa+"&pn="+mer+"&am="+amn+"&tn=&mam=null&cu=INR"
+
+    document.getElementById('blaah').src=uri;   
+  })
+
+
+</script>

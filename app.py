@@ -154,12 +154,11 @@ def log():
          return render_template('myTable.html')
 
 
-          
-         
-     
-         
 
-    
+@app.route('/upi')
+def upi():
+    return render_template('upi.html')
+
 
                
             
