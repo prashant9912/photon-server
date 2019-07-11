@@ -54,7 +54,7 @@ fetch("http://localhost:5000/configview").then(e=>{return e.text()}).then(e=>{
     let amn = "100";
     let mer= "SIH";
     let vpa=e;
-    let uri="https://api.qrserver.com/v1/create-qr-code/?data=upi://pay?pa="+vpa+"&pn="+mer+"&am="+amn+"&tn=&mam=null&cu=INR"
+    let uri="https://api.qrserver.com/v1/create-qr-code/?data=upi://pay?pa="+vpa+"&pn="+mer+"&am=100&tn=&mam=null&cu=INR"
 
     document.getElementById('blaah').src=uri;   
   })
