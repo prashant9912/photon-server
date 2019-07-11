@@ -46,6 +46,10 @@ let svgContainer = document.querySelector('.bodymovinanim');
     });
     
 // NFC Request
+fetch("http://localhost:5000/configview").then(e=>{return e.text()}).then(e=>{
+    document.getElementById('vpa').value= e;
+    console.log(e);
+  })
 
 let formData = new FormData();
 formData.append('VPA', 'hello@upi');

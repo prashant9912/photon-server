@@ -10,6 +10,7 @@ from email.mime.text import MIMEText
 import razorpay
 import pandas as pd
 import os
+import json
 
 app = Flask(__name__)
 api = Api(app)
@@ -47,7 +48,8 @@ def nfc():
 @app.route('/nfcpy', methods=["POST","GET"])
 def nfcc():
     if request.method == "POST":
-        vpa=request.form['VPA']
+        # vpa=request.form['VPA']
+        vpa= lview()
         amn=request.form['Amount']
         mer=request.form['Merchant']
         uri="upi://pay?pa="+vpa+"&pn="+mer+"&am="+amn+"&tn=&mam=null&cu=INR"
@@ -70,6 +72,28 @@ def adhaar():
 @app.route('/gateway')
 def gateway():
     return render_template('razor.html')
+    
+@app.route('/config')
+def lconf():
+    vpa = request.args.get('vpa')
+    with open('config.json', 'r') as f:
+        config = json.load(f)
+
+    #edit the data
+    config['vpa'] = vpa
+
+    #write it back to the file
+    with open('config.json', 'w') as f:
+        json.dump(config, f)
+    return "1"
+
+
+@app.route('/configview')
+def lview():
+     with open('config.json', 'r') as f:
+        config = json.load(f)
+        vpa= config['vpa']
+        return vpa
 
 #Razor Pay Gateway
 razorpay_client = razorpay.Client(auth=("rzp_test_KJaS279k3XSHLG", "3L6pkF6GTek6blM6T95cPign"))
