@@ -1,0 +1,8 @@
+Time,Trx_id,Amount,Status,Payment Method
+10/07/2019 02:34 PM,wow,124,true
+10/07/2019 02:38 PM,wow,124,true
+10/07/2019 02:38 PM,wow,124,true
+10/07/2019 02:52 PM,99283,2000,true
+10/07/2019 02:53 PM,xxxx,2000xx,false
+10/07/2019 02:55 PM,hello,2000xx,false
+11/07/2019 08:12 AM,hello,2000xx,false,razorpay

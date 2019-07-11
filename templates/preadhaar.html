@@ -1,0 +1,170 @@
+<div style="position:absolute; left:50px;z-index: 10; top:20px;"> <img src="https://image.flaticon.com/icons/svg/61/61752.svg" alt="" onclick="window.history.go(-1); return false;" width="50px;"> </div>
+
+<script src="/static/scripts/jquery-3.4.1.min.js"></script>
+
+
+
+
+<script>
+setTimeout(()=>{
+
+    $('ol.keys li:nth-child(1)').click(function() {
+    console.log(1);
+  $('#display').append("1");
+});
+$('ol.keys li:nth-child(2)').click(function() {
+  $('#display').append("2");
+});
+$('ol.keys li:nth-child(3)').click(function() {
+  $('#display').append("3");
+});
+$('ol.keys li:nth-child(4)').click(function() {
+  $('#display').append("4");
+});
+$('ol.keys li:nth-child(5)').click(function() {
+  $('#display').append("5");
+});
+$('ol.keys li:nth-child(6)').click(function() {
+  $('#display').append("6");
+});
+$('ol.keys li:nth-child(7)').click(function() {
+  $('#display').append("7");
+});
+$('ol.keys li:nth-child(8)').click(function() {
+  $('#display').append("8");
+});
+$('ol.keys li:nth-child(9)').click(function() {
+  $('#display').append("9");
+});
+$('ol.keys li:nth-child(10)').click(function() {
+  $('#display').append("0");
+});
+
+clear= document.getElementById('clr');
+display = document.getElementById('display');
+
+clear.addEventListener('click', () => {
+            display.innerHTML =''; 
+        })
+  
+
+  
+  
+},1000);
+</script>
+
+<style>
+
+[title]{
+    text-align: center;
+left:50%;
+transform: translate(-50%);
+    position: absolute;
+    top:10vh;
+    font-size:7vh;
+font-family: -apple-system,system-ui,BlinkMacSystemFont;
+color:rgba(0, 0, 0, 0.6);
+}
+
+
+
+
+div#keyboard {
+  width:400px;
+height:150px;
+  margin:0 auto;
+}
+ol.keys {
+  list-style-type:none;
+}
+
+ol.keys li {
+  width:25%;
+  display:block;
+  text-align:center;
+  height:2em;
+  float:left;
+  font-size:1.3em;
+  font-family:sans-serif;
+  padding-top:.7em;
+  border:1px solid rgb(100,100,100);
+ color:white;
+  background-color:rgba(0,0,0,.8);
+}
+
+ol.keys li:hover {
+  cursor:pointer;
+}
+ol.keys li:active {
+  background-color:rgb(200,200,200);
+  color:#000;
+}
+#display {
+  clear:both;
+  width:300px;
+  margin:0 auto;
+  display:block;
+  border:1px solid rgba(0, 0, 0, 0.384);
+  color:rgba(0, 0, 0, 0.664);
+ 
+/*   color:white; */
+  font-family:'Helvetica';
+  font-size:2em;
+  margin-top:5em;
+  padding:.3em;
+  height:1.3em;
+}
+[pay]{
+    width: 70% !important;
+    background-color: #2ecc71 !important;
+}
+
+
+@media only screen and (max-width:  1000px) {
+    #display {
+        margin-top:3em;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+    #display {
+        margin-top:2em;
+  }
+  [main]{
+      transform: scale(0.7);
+  }
+}
+
+</style>
+
+<div title>Enter Your Adhaar Number</div>
+
+
+
+<div main>
+
+<span id="display"></span>
+
+
+
+<div id="keyboard">
+  <ol class="keys">
+     <li>1</li>
+     <li>2</li>
+     <li>3</li>
+     <li>4</li>
+     <li>5</li>
+     <li>6</li>
+     <li>7</li>
+     <li>8</li>
+     <li>9</li>
+     <li>0</li>
+    
+    <li id="clr"><div >Clear </div></li>
+    <li pay onclick="window.location.href = '/adhaar';return false;"><div>Pay Now </div></li>
+  </ol>
+</div>
+
+</div>
+<br>
+

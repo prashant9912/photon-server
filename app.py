@@ -8,7 +8,7 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import razorpay
-
+import pandas as pd
 
 
 app = Flask(__name__)
@@ -25,9 +25,9 @@ def after_request(response):
     response.headers.add('Access-Control-Allow-Methods', 'GET')
     return response
 
-@app.route('/')
-def home():
-    return render_template('index.html')
+# @app.route('/')
+# def home():
+#     return render_template('index.html')
 
 @app.route('/main')
 def mai():
@@ -37,9 +37,20 @@ def mai():
 def qr():
     return render_template('qr.html')
 
+
+
+#################################
 @app.route('/nfc')
 def nfc():
     return render_template('nfc.html')
+
+
+
+####################################
+
+@app.route('/preadhaar')
+def preadhaar():
+    return render_template('preadhaar.html')
 
 @app.route('/adhaar')
 def adhaar():
@@ -61,6 +72,70 @@ def razooor():
     return render_template('success.html')
 
 ##################################
+
+
+########## LOGS File ####
+@app.route('/log', methods = ['POST', 'GET'])
+def log():
+     if request.method == 'POST':
+
+         trx_id = request.form['id']
+         lamount = request.form['amount']
+         lstatus = request.form['status']
+         lmethod = request.form['method']
+         import csv
+         import datetime
+         import time
+         ts = time.time()
+         st = datetime.datetime.fromtimestamp(ts).strftime('%d/%m/%Y %I:%M %p')
+         fields=[st,trx_id,lamount,lstatus,lmethod]
+         with open(r'logs.csv', 'a') as f:
+              writer = csv.writer(f)
+              writer.writerow(fields)
+         return '1'
+     if request.method == 'GET':
+         df = pd.read_csv('logs.csv')
+
+
+         pd.set_option('colheader_justify', 'center')   # FOR TABLE <th>
+
+         html_string = '''
+            <html>
+            <head><title>Logs</title></head>
+            <link rel="stylesheet" type="text/css" href='/static/stylesheets/logstyle.css'/>
+            <body>
+            <div style="position:absolute; left:50px;z-index: 10;"> <img src="https://image.flaticon.com/icons/svg/61/61752.svg" alt="" onclick="window.history.go(-1); return false;" width="30vw;"> </div>
+            <div title><h1 >Payment Logs</h1></div>
+                {table}
+            </body>
+            </html>.
+            '''
+
+         # OUTPUT AN HTML FILE
+         with open('templates/myTable.html', 'w') as f:
+            f.write(html_string.format(table=df.to_html(classes='mystyle')))
+
+                    #  df.to_html('templates/myTable.html')
+         return render_template('myTable.html')
+
+
+          
+         
+     
+         
+
+    
+
+               
+            
+
+           
+          
+            
+            
+
+
+##############################333
 
 @app.route('/', methods = ['POST', 'GET'])
 def index():
