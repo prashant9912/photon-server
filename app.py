@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect,Response
+from flask import Flask, render_template, request, redirect,Response, send_file
 from flask_restful import Resource, Api
 import json, string, random, os
 from urllib import urlencode, quote_plus
@@ -12,7 +12,13 @@ import pandas as pd
 import os
 import json
 
+# from flask_qrcode import QRcode
+
 app = Flask(__name__)
+# qrcode = QRcode(app)
+
+
+
 api = Api(app)
 
 
@@ -161,8 +167,12 @@ def upi():
 
 
                
-            
 
+# @app.route("/qrcode", methods=["GET"])
+# def get_qrcode():
+#     # please get /qrcode?data=<qrcode_data>
+#     data = request.args.get("data", "")
+#     return send_file(qrcode(data, mode="raw"), mimetype="image/png")
            
           
             

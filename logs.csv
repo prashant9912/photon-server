@@ -1,8 +1,8 @@
 Time,Trx_id,Amount,Status,Payment Method
-10/07/2019 02:34 PM,wow,124,true
-10/07/2019 02:38 PM,wow,124,true
-10/07/2019 02:38 PM,wow,124,true
-10/07/2019 02:52 PM,99283,2000,true
-10/07/2019 02:53 PM,xxxx,2000xx,false
-10/07/2019 02:55 PM,hello,2000xx,false
-11/07/2019 08:12 AM,hello,2000xx,false,razorpay
+10/07/2019 02:34 PM,923872718,100,success,qr-upi
+10/07/2019 02:38 PM,295871020,100,success,nfc-upi
+10/07/2019 02:38 PM,350328383,200,failed,nfc-upi
+10/07/2019 02:52 PM,542094943,300,success,nfc-upi
+10/07/2019 02:53 PM,345982849,230,success,gateway
+10/07/2019 02:55 PM,348203534,50,failed,qr-scan
+11/07/2019 08:12 AM,348039090,90,false,razorpay

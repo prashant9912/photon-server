@@ -31,13 +31,25 @@ padding:5px;
 /* left: 50%;
 transform: translate(-50%); */
 }
-#blaah{
+#qr{
     position: absolute;
     top: 50%;
     left: 50%;
     margin-right: -50%;
     transform: translate(-50%, -50%);
     width: 180px;
+    color:rgba(0, 0, 0, 0.452);
+}
+#qrtext{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    width: 180px;
+    color:rgba(0, 0, 0, 0.452);
+    font-size: 40px;
+    white-space: nowrap;
 }
 </style>
 
@@ -45,19 +57,32 @@ transform: translate(-50%); */
 <div title>Please Scan QR Code to Pay</div>
 <div title2>Total Payble Amount ₹100 </div>
 
-<img id="blaah" src=""/>
-
+<img src=""  id ='qr'/>
+<div id ='qrtext'>Please Wait....</div>
 <script>
    
 
-fetch("http://localhost:5000/configview").then(e=>{return e.text()}).then(e=>{
+fetch("http://localhost:5000/configview").then(e=>{return e.text()}).then(async e=>{
     let amn = "100";
     let mer= "SIH";
     let vpa=e;
-    let uri="https://api.qrserver.com/v1/create-qr-code/?data=upi://pay?pa="+vpa+"&pn="+mer+"&am=100&tn=&mam=null&cu=INR"
+    let upi = "upi://pay?pa="+vpa+"&pn="+mer+"&am=100&tn=&mam=null&cu=INR";
+     let uri="https://api.qrserver.com/v1/create-qr-code/?data=" + encodeURIComponent(upi);
+    
 
-    document.getElementById('blaah').src=uri;   
-  })
+console.log(uri);
+
+
+document.getElementById('qrtext').style.display="none";
+document.getElementById('qr').src=uri;
+
+})
+
+    // var res = f.concat(data, s);
+    // console.log(res)
+    
+
+   
 
 
 </script>
