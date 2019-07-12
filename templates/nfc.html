@@ -39,6 +39,7 @@ transform: translate(-50%); */
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.5.3/lottie_svg.min.js"></script>
 <script>
+
 let svgContainer = document.querySelector('.bodymovinanim');
     let animItem = bodymovin.loadAnimation({
       wrapper: svgContainer,
@@ -61,8 +62,36 @@ fetch("/nfcpy",
     {
         body: formData,
         method: "post"
+    }).then(e=>{return e.text()}).then((e)=>{
+      document.location.href = "/success"
     });
 
 
+
+
+
+    // function tick(){
+    //             min = 3;
+    //             sec = 0;
+    //             setInterval(function(){
+    //              if(sec == 0){
+    //                 min= min-1;
+    //                 sec= 60;
+    //              }
+    //             if(min==0){
+    //                 document.getElementById("timer").style.display = "none";
+    //             }
+
+    //             sec= sec-1;
+
+    //             document.getElementById("min").innerHTML= min;
+    //         document.getElementById("sec").innerHTML= sec;
+
+    //             }, 1000);
+    //         }
+
+    //         tick(); 
+    // document.getElementById("loadin").style.display="none";
+    // document.getElementById("timer").style.display="block";
 
     </script>

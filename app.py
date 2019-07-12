@@ -60,7 +60,7 @@ def nfcc():
         mer=request.form['Merchant']
         uri="upi://pay?pa="+vpa+"&pn="+mer+"&am="+amn+"&tn=&mam=null&cu=INR"
         os.system('python ndef_url.py -u \"'+uri+'\"')
-        return Response(status=200)
+        return "1"
     else:
         return Response(status=400)
 
@@ -113,6 +113,10 @@ def razooor():
     return render_template('success.html')
 
 ##################################
+
+@app.route('/success')
+def suc():
+     return render_template('success.html')
 
 
 ########## LOGS File ####
