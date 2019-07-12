@@ -63,7 +63,10 @@ fetch("/nfcpy",
         body: formData,
         method: "post"
     }).then(e=>{return e.text()}).then((e)=>{
-      document.location.href = "/success"
+      setTimeout(() => {
+        document.location.href = "/success"
+
+      }, 8000);
     });
 
 
